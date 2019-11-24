@@ -1,5 +1,5 @@
-//Given an array of ones and zeroes, convert the equivalent binary value to an integer.
-//Eg: [0, 0, 0, 1] is treated as 0001 which is the binary representation of 1.
+// Given an array of ones and zeroes, convert the equivalent binary value to an integer.
+// Eg: [0, 0, 0, 1] is treated as 0001 which is the binary representation of 1.
 
 func convertValue(fromBinaryArray binaryArray: [Int]) -> Int {
     return binaryArray
@@ -13,7 +13,7 @@ func convertValue(fromBinaryArray binaryArray: [Int]) -> Int {
         })
 }
 
-// Own implementation for the power function
+// Power function own implementation
 func powerInt(base: Int, exp: UInt) -> Int {
     guard exp != 0 else { return 1 }
     guard exp != 1 else { return base }
