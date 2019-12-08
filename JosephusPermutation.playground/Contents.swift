@@ -25,7 +25,7 @@ func populatePeopleArray(n: Int) -> [Int] {
 func josephusSurvivor(n: Int, k: Int) -> Int? {
     guard n > 0, k > 0 else { return nil }
     var array = populatePeopleArray(n: n)
-    
+    print(array)
     var indexToKill: Int = 0
     repeat {
         if indexToKill >= array.count {
@@ -38,6 +38,7 @@ func josephusSurvivor(n: Int, k: Int) -> Int? {
             diff = indexToKill - array.count
         }
         array.remove(at: indexToKill)
+        print(array)
     } while array.count > 1
     
     return array.first ?? nil
@@ -45,5 +46,7 @@ func josephusSurvivor(n: Int, k: Int) -> Int? {
 
 XCTAssertEqual(josephusSurvivor(n: 7, k: 3), 4)
 XCTAssertEqual(josephusSurvivor(n: 11, k: 5), 8)
+XCTAssertEqual(josephusSurvivor(n: 5, k: 7), 4)
 XCTAssertEqual(josephusSurvivor(n: 5, k: -1), nil)
+XCTAssertEqual(josephusSurvivor(n: 0, k: 2), nil)
 XCTAssertEqual(josephusSurvivor(n: 0, k: -1), nil)
