@@ -1,6 +1,8 @@
 // Given an array of ones and zeroes, convert the equivalent binary value to an integer.
 // Eg: [0, 0, 0, 1] is treated as 0001 which is the binary representation of 1.
 
+import XCTest
+
 func convertValue(fromBinaryArray binaryArray: [Int]) -> Int {
     return binaryArray
         .reversed()
@@ -26,5 +28,9 @@ func powerInt(base: Int, exp: UInt) -> Int {
     return value
 }
 
-convertValue(fromBinaryArray: [1, 1, 1, 1])
-convertValue(fromBinaryArray: [1, 0, 1, 1, 1, 1])
+XCTAssertEqual(powerInt(base: 2, exp: 2), 4)
+XCTAssertEqual(powerInt(base: 6, exp: 8), 1679616)
+XCTAssertEqual(powerInt(base: -6, exp: 3), -216)
+
+XCTAssertEqual(convertValue(fromBinaryArray: [1, 1, 1, 1]), 15)
+XCTAssertEqual(convertValue(fromBinaryArray: [1, 0, 1, 1, 1, 1]), 47)
