@@ -36,6 +36,7 @@ class TreeNode {
 }
 
 func kthSmallest(_ root: TreeNode?, _ k: Int) -> Int {
+    // Recursive Inorder Traversal
     var data: [Int] = []
     dfsHelper(root, data: &data)
     if data.count == 0{
@@ -51,6 +52,34 @@ private func dfsHelper(_ node: TreeNode?, data: inout [Int]){
     data.append(node.val)
     dfsHelper(node.right, data: &data)
 }
+
+func kthSmallestStack(_ root: TreeNode?, _ k: Int) -> Int {
+    // Iterative Inorder Traversal with stack
+    var stack = [TreeNode]()
+    var count = k
+    var root = root
+
+    while root != nil {
+        stack.append(root!)
+        root = root?.left
+    }
+
+    while count != 0 {
+        let node = stack.removeLast()
+        count -= 1
+        if count == 0 {
+            return node.val
+        }
+        var rightNode = node.right
+        while rightNode != nil {
+            stack.append(rightNode!)
+            rightNode = rightNode?.left
+        }
+    }
+
+    return -1
+}
+
 
 /*
  Follow up:
@@ -109,6 +138,52 @@ class TestCase: XCTestCase {
     func testOneElement() {
         XCTAssertEqual(
             kthSmallest(
+                TreeNode(5,
+                         nil,
+                         nil
+                ), 1
+            ), 5)
+    }
+
+    func testStackSomehowBalanced() {
+        XCTAssertEqual(
+            kthSmallestStack(
+                TreeNode(3,
+                         TreeNode(1,
+                                  nil,
+                                  TreeNode(2,
+                                           nil,
+                                           nil)),
+                         TreeNode(4,
+                                  nil,
+                                  nil)
+                ), 1
+            ), 1)
+    }
+
+    func testStackLeftBalanced() {
+        XCTAssertEqual(
+            kthSmallestStack(
+                TreeNode(5,
+                         TreeNode(3,
+                                  TreeNode(2,
+                                           TreeNode(1,
+                                                    nil,
+                                                    nil),
+                                           nil),
+                                  TreeNode(4,
+                                           nil,
+                                           nil)),
+                         TreeNode(6,
+                                  nil,
+                                  nil)
+                ), 3
+            ), 3)
+    }
+
+    func testStackOneElement() {
+        XCTAssertEqual(
+            kthSmallestStack(
                 TreeNode(5,
                          nil,
                          nil
